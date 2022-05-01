@@ -30,13 +30,6 @@ df <- read_excel("state_count(econ,bio,psych).xlsx")
 ```
 
 
-```{r eval = TRUE}
-library(tidyverse)
-ggplot(mtcars, aes(hp,mpg)) + 
-  geom_point() + 
-  geom_smooth() + 
-  theme_bw()
-```
 
 ```{r}
 df_bio <- df %>% select(Full_State,state, count_bio, perc_bio)
@@ -104,3 +97,12 @@ The top 5 majors based on data are as follows:
 ## Lawrence Alumnis who majored in Biology (Map of 309 Students)
 
 The graph below shows the percentage of Lawrence alumni working around the United States who had majored in Biology during their time at Lawrence. The maps are interactive - hover over them to reveal the name of the state and the percentage of Lawrence alums working there. 
+
+
+```{r eval = TRUE}
+library(tidyverse)
+ggplot(mtcars, aes(hp,mpg)) + 
+  geom_point() + 
+  geom_smooth() + 
+  theme_bw()
+```
