@@ -1,0 +1,276 @@
+---
+title: "Second_Blog"
+description: This is the second test blog
+  A short description of the post.
+author:
+  - name: Raian Rith
+    url: https://www.linkedin.com/in/raian-rith/
+date: 2022-05-01
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE) 
+```
+
+
+Distill is a publication format for scientific and technical writing, native to the web.
+
+Learn more about using Distill at <https://rstudio.github.io/distill>.
+
+This html file provides choropleth maps based on the percentage of Lawrence alumnis who accepted jobs/researches in various states around the US. Data has been collected by the Career Center, Lawrence University. The maps are interactive - hover over them to reveal the name of the state and the percentage of Lawrence alums working there. 
+
+The top 5 majors based on data are as follows:
+
+1) Biology - 309 Students
+
+2) Psychology - 250 Students
+
+3) Economics - 233 Students
+
+4) English - 203 Students
+
+5) Government - 184 Students
+
+
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(plotly)
+library(dplyr)
+```
+
+```{r}
+df <- read_excel("state_count(econ,bio,psych).xlsx")
+```
+
+
+
+## Lawrence Alumnis who majored in Biology (Map of 309 Students)
+
+The graph below shows the percentage of Lawrence alumni working around the United States who had majored in Biology during their time at Lawrence. The maps are interactive - hover over them to reveal the name of the state and the percentage of Lawrence alums working there. 
+
+```{r}
+df_bio <- df %>% select(Full_State,state, count_bio, perc_bio)
+df_bio$perc_bio1 <- df_bio$perc_bio*100
+df_bio <- df_bio %>% select(Full_State, state, count_bio, perc_bio1)
+df_bio$round_perc <- round(df_bio$perc_bio1 ,digit=2)
+df_bio <- df_bio %>% 
+                select(Full_State,state, count_bio, percentage_of_alum = round_perc) %>%
+                mutate(hover = paste0(Full_State, "\n", percentage_of_alum, "%"))
+```
+
+```{r}
+
+fontStyle = list(
+  size = 15,
+  color = "black"
+)
+
+label = list(
+  bgcolor = "#EEEEEE",
+  bordercolor = "transparent",
+  font = fontStyle
+)
+
+bio_graph <- plot_geo(df_bio,
+                       locationmode = 'USA-states') %>%
+  add_trace(locations = ~state,
+            z = ~percentage_of_alum,
+            zmin = 0,
+            zmid = 15,
+            color = ~percentage_of_alum, 
+            colorscale = 'Greens',
+            reversescale = TRUE,
+            text = ~hover,
+            hoverinfo = 'text') %>%
+  layout(geo = list(scope ='usa'),
+         title = "Lawrence Alums Working in USA\n(Majored in Biology)") %>%
+  colorbar(tickprefix =  "(%) ")
+
+bio_graph
+```
+
+## Lawrence Alumnis who majored in Psychology (Map of 255 Students)
+
+The graph below shows the percentage of Lawrence alumni working around the United States who had majored in Psychology during their time at Lawrence. The maps are interactive - hover over them to reveal the name of the state and the percentage of Lawrence alums working there. 
+
+```{r}
+df_psych <- df %>% select(Full_State,state, count_psych, perc_psych)
+df_psych$perc_psych1 <- df_psych$perc_psych*100
+df_psych <- df_psych %>% select(Full_State, state, count_psych, perc_psych1)
+df_psych$round_perc <- round(df_psych$perc_psych1 ,digit=2)
+df_psych <- df_psych %>% 
+                select(Full_State,state, count_psych, percentage_of_alum = round_perc) %>%
+                mutate(hover = paste0(Full_State, "\n", percentage_of_alum, "%"))
+```
+
+```{r}
+
+fontStyle = list(
+  size = 15,
+  color = "black"
+)
+
+label = list(
+  bgcolor = "#EEEEEE",
+  bordercolor = "transparent",
+  font = fontStyle
+)
+
+psych_graph <- plot_geo(df_psych,
+                       locationmode = 'USA-states') %>%
+  add_trace(locations = ~state,
+            z = ~percentage_of_alum,
+            zmin = 0,
+            zmid = 15,
+            color = ~percentage_of_alum, 
+            colorscale = 'Blues',
+            reversescale = TRUE,
+            text = ~hover,
+            hoverinfo = 'text') %>%
+  layout(geo = list(scope ='usa'),
+         title = "Lawrence Alums Working in USA\n(Majored in Psychology)") %>%
+  colorbar(tickprefix =  "(%) ")
+
+psych_graph
+```
+
+## Lawrence Alumnis who majored in Economics (Map of 233 Students)
+
+The graph below shows the percentage of Lawrence alumni working around the United States who had majored in Economics during their time at Lawrence. The maps are interactive - hover over them to reveal the name of the state and the percentage of Lawrence alums working there. 
+
+```{r}
+df_econ <- df %>% select(Full_State,state, count_econ, perc_econ)
+df_econ$perc_econ1 <- df_econ$perc_econ*100
+df_econ <- df_econ %>% select(Full_State, state, count_econ, perc_econ1)
+df_econ$round_perc <- round(df_econ$perc_econ1 ,digit=2)
+df_econ <- df_econ %>% 
+                select(Full_State,state, count_econ, percentage_of_alum = round_perc) %>%
+                mutate(hover = paste0(Full_State, "\n", percentage_of_alum, "%"))
+```
+
+```{r}
+
+fontStyle = list(
+  size = 15,
+  color = "black"
+)
+
+label = list(
+  bgcolor = "#EEEEEE",
+  bordercolor = "transparent",
+  font = fontStyle
+)
+
+econ_graph <- plot_geo(df_econ,
+                       locationmode = 'USA-states') %>%
+  add_trace(locations = ~state,
+            z = ~percentage_of_alum,
+            zmin = 0,
+            zmid = 12.5,
+            color = ~percentage_of_alum, 
+            colorscale = 'YlOrRd',
+            reversescale = TRUE,
+            text = ~hover,
+            hoverinfo = 'text') %>%
+  layout(geo = list(scope ='usa'),
+         title = "Lawrence Alums Working in USA\n(Majored in Economics)") %>%
+  colorbar(ticksuffix =  "%")
+
+econ_graph
+```
+
+## Lawrence Alumnis who majored in English (Map of 203 Students)
+
+The graph below shows the percentage of Lawrence alumni working around the United States who had majored in English during their time at Lawrence. The maps are interactive - hover over them to reveal the name of the state and the percentage of Lawrence alums working there. 
+
+```{r}
+df_eng <- df %>% select(Full_State,state, count_eng, perc_eng)
+df_eng$perc_eng1 <- df_eng$perc_eng*100
+df_eng <- df_eng %>% select(Full_State, state, count_eng, perc_eng1)
+df_eng$round_perc <- round(df_eng$perc_eng1 ,digit=2)
+df_eng <- df_eng %>% 
+                select(Full_State,state, count_eng, percentage_of_alum = round_perc) %>%
+                mutate(hover = paste0(Full_State, "\n", percentage_of_alum, "%"))
+```
+
+```{r}
+
+fontStyle = list(
+  size = 15,
+  color = "black"
+)
+
+label = list(
+  bgcolor = "#EEEEEE",
+  bordercolor = "transparent",
+  font = fontStyle
+)
+
+eng_graph <- plot_geo(df_eng,
+                       locationmode = 'USA-states') %>%
+  add_trace(locations = ~state,
+            z = ~percentage_of_alum,
+            zmin = 0,
+            zmid = 18,
+            color = ~percentage_of_alum, 
+            colorscale =  'Hot',
+            reversescale = TRUE,
+            text = ~hover,
+            hoverinfo = 'text') %>%
+  layout(geo = list(scope ='usa'),
+         title = "Lawrence Alums Working in USA\n(Majored in English)") %>%
+  colorbar(tickprefix =  "(%) ")
+
+eng_graph
+```
+
+## Lawrence Alumnis who majored in Government (Map of 184 Students)
+
+The graph below shows the percentage of Lawrence alumni working around the United States who had majored in Government during their time at Lawrence. The maps are interactive - hover over them to reveal the name of the state and the percentage of Lawrence alums working there. 
+
+```{r}
+df_gov <- df %>% select(Full_State,state, count_gov, perc_gov)
+df_gov$perc_gov1 <- df_gov$perc_gov*100
+df_gov <- df_gov %>% select(Full_State, state, count_gov, perc_gov1)
+df_gov$round_perc <- round(df_gov$perc_gov1 ,digit=2)
+df_gov <- df_gov %>% 
+                select(Full_State,state, count_gov, percentage_of_alum = round_perc) %>%
+                mutate(hover = paste0(Full_State, "\n", percentage_of_alum, "%"))
+```
+
+```{r}
+
+fontStyle = list(
+  size = 15,
+  color = "black"
+)
+
+label = list(
+  bgcolor = "#EEEEEE",
+  bordercolor = "transparent",
+  font = fontStyle
+)
+
+gov_graph <- plot_geo(df_gov,
+                       locationmode = 'USA-states') %>%
+  add_trace(locations = ~state,
+            z = ~percentage_of_alum,
+            zmin = 0,
+            zmid = 15,
+            color = ~percentage_of_alum, 
+            colorscale =  'Greys',
+            reversescale = TRUE,
+            text = ~hover,
+            hoverinfo = 'text') %>%
+  layout(geo = list(scope ='usa'),
+         title = "Lawrence Alums Working in USA\n(Majored in Government)") %>%
+  colorbar(tickprefix =  "(%) ")
+
+gov_graph
+```
