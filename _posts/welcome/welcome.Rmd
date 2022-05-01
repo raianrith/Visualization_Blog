@@ -1,10 +1,9 @@
 ---
 title: "Welcome to Visualization_Blog"
 description: |
-  Welcome to our new blog, Visualization_Blog. We hope you enjoy 
-  reading what we have to say!
+  Welcome to my new blog, Visualization_Blog. The hobby of visualizing data has always made me want to clean, feature engineer, manipulate, and visualize random data from the internet and help audience build a story just by looking at the 
 author:
-  - name: Nora Jones 
+  - name: Raian Rith
     url: https://example.com/norajones
     affiliation: Spacely Sprockets
     affiliation_url: https://example.com/spacelysprokets
@@ -17,10 +16,18 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
-# Learn more about creating blogs with Distill at:
-# https://rstudio.github.io/distill/blog.html
+
 
 ```
 
 
+<aside>
+```{r eval = TRUE}
+library(tidyverse)
+ggplot(mtcars, aes(hp,mpg)) + 
+  geom_point() + 
+  geom_smooth() + 
+  theme_bw()
+```
+</aside>
 
