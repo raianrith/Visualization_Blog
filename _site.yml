@@ -1,8 +1,9 @@
-name: "Visualization_Blog"
-title: "Visualization_Blog"
+name: "RaianRith_Visualization_Blog"
+title: "RaianRith_Visualization_Blog"
 description: |
-  Visualization_Blog
+  A blog that visualizes data from random topics in today's world. 
 output_dir: "_site"
+theme: apreshill.css
 navbar:
   right:
     - text: "Home"
