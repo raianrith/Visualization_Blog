@@ -109,6 +109,7 @@ df_psych <- df_psych %>%
                 mutate(hover = paste0(Full_State, "\n", percentage_of_alum, "%"))
 ```
 
+<aside>
 ```{r}
 
 fontStyle = list(
@@ -139,6 +140,7 @@ psych_graph <- plot_geo(df_psych,
 
 psych_graph
 ```
+</aside>
 
 ## Lawrence Alumnis who majored in Economics (Map of 233 Students)
 
