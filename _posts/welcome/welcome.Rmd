@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-<aside>
+
 ```{r eval = TRUE}
 library(tidyverse)
 ggplot(mtcars, aes(hp,mpg)) + 
@@ -29,5 +29,5 @@ ggplot(mtcars, aes(hp,mpg)) +
   geom_smooth() + 
   theme_bw()
 ```
-</aside>
+
 
